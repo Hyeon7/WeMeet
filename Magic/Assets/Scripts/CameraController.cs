@@ -41,5 +41,7 @@ public class CameraController : MonoBehaviour
         transform.position = new Vector3(transform.position.x, currentHeight, transform.position.z);
 
         transform.LookAt(target);
+
+        // https://ojui.tistory.com/30
     }
 }
