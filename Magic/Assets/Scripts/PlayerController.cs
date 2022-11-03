@@ -19,6 +19,21 @@ public class PlayerController : MonoBehaviourPun
 
     RaycastHit hit;
 
+    [SerializeField]
+    private Transform shotTr;
+
+    [SerializeField]
+    private GameObject fireBall;
+
+    [SerializeField]
+    private GameObject waterBall;
+
+    [SerializeField]
+    private GameObject iceBall;
+
+    [SerializeField]
+    private GameObject stoneBall;
+
     IEnumerator Start()
     {
         rigidbody = GetComponent<Rigidbody>();
@@ -43,7 +58,24 @@ public class PlayerController : MonoBehaviourPun
     {
         v = Input.GetAxis("Vertical");
         h = Input.GetAxis("Horizontal");
-        r = Input.GetAxis("Mouse X");      
+        r = Input.GetAxis("Mouse X");
+
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            Instantiate(fireBall, shotTr.transform.position, shotTr.transform.rotation);
+        }
+        else if (Input.GetKeyDown(KeyCode.X))
+        {
+            Instantiate(waterBall, shotTr.transform.position, shotTr.transform.rotation);
+        }
+        else if (Input.GetKeyDown(KeyCode.C))
+        {
+            Instantiate(iceBall, shotTr.transform.position, shotTr.transform.rotation);
+        }
+        else if (Input.GetKeyDown(KeyCode.V))
+        {
+            Instantiate(stoneBall, shotTr.transform.position, shotTr.transform.rotation);
+        }
     }
 
     void FixedUpdate()

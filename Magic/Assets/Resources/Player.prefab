@@ -137,6 +137,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 3
   turnSpeed: 0
+  shotTr: {fileID: 7789628064985648945}
+  fireBall: {fileID: 5570898405337153869, guid: f835d55fba63d52438287642d8ae814b, type: 3}
+  waterBall: {fileID: 7825198540461861138, guid: 85c1744fc03f4bf4d889951004c6b2a6, type: 3}
+  iceBall: {fileID: 1597562944658885624, guid: d337d76b90162084481262c2e7265764, type: 3}
+  stoneBall: {fileID: 4249148611906721376, guid: 4839d59ff0163034d8a0f02fcec6fcbf, type: 3}
 --- !u!114 &690112136776348433
 MonoBehaviour:
   m_ObjectHideFlags: 0
