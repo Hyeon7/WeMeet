@@ -31,6 +31,7 @@ public class EnemyController : MonoBehaviour
     void Start()
     {
         agent = GetComponent<NavMeshAgent>(); // 네비게이션메쉬
+        StartCoroutine(FindPlayer());
     }
 
     // Update is called once per frame
@@ -40,6 +41,14 @@ public class EnemyController : MonoBehaviour
         {
             Destroy(gameObject); // 오브젝트 삭제
         }
-        agent.SetDestination(target.transform.position); // 플레이어를 향해 달려가도록
+    }
+
+    IEnumerator FindPlayer()
+    {
+        agent.enabled = true;
+        while (agent.SetDestination(target.transform.position))
+        {
+            yield return null;
+        }
     }
 }
