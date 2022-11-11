@@ -34,7 +34,7 @@ public class EnemyGenerator : MonoBehaviour
         {
             int spawnPos = Random.Range(0, spawnPoint.Length);
             GameObject enemy = Instantiate(enemyPrefab, spawnPoint[spawnPos].position, spawnPoint[spawnPos].rotation);
-            enemy.GetComponent<EnemyNav>().target = targetPos.transform;
+            enemy.GetComponent<EnemyController>().target = targetPos;
             timeAfterSpawn = 0f;
         }
 

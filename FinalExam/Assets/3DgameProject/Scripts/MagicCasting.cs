@@ -5,7 +5,7 @@ using UnityEngine;
 public class MagicCasting : MonoBehaviour
 {
     [SerializeField]
-    private float magicSpeed = 1f; // 마법 속도
+    private float magicSpeed = 0.3f; // 마법 속도
 
     public int magicDamage = 3; // 마법 데미지
 
@@ -20,14 +20,13 @@ public class MagicCasting : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        
     }
 
     // Update is called once per frame
     void Update()
     {
         transform.Translate(Vector3.forward * magicSpeed); // 앞의 방향으로 마법속도로 날아가기
-        Destroy(gameObject, 6); // 3초뒤 마법 삭제
+        Destroy(gameObject, 3); // 3초뒤 마법 삭제
     }
 }
-
