@@ -5,19 +5,15 @@ using UnityEngine;
 public class MagicCasting : MonoBehaviour
 {
     [SerializeField]
-    private float magicSpeed = 0.3f;
+    private float magicSpeed = 0.3f; // 마법 속도
 
-    public int magicDamage = 3;
+    public int magicDamage = 3; // 마법 데미지
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Enemy")
+        if (collision.gameObject.tag == "Enemy") // 적과 충돌
         {
-            Destroy(gameObject);
-        }
-        if (collision.gameObject.tag == "Player")
-        {
-            
+            Destroy(gameObject); // 오브젝트 삭제
         }
     }
 
@@ -30,7 +26,7 @@ public class MagicCasting : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(Vector3.forward * magicSpeed);
-        Destroy(gameObject, 10);
+        transform.Translate(Vector3.forward * magicSpeed); // 앞의 방향으로 마법속도로 날아가기
+        Destroy(gameObject, 3); // 3초뒤 마법 삭제
     }
 }
