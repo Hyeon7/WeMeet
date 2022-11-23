@@ -5,7 +5,8 @@ using UnityEngine;
 public class EnemyGenerator : MonoBehaviour
 {
     public GameObject enemyPrefab;
-    public GameObject targetPos;
+    [SerializeField]
+    Transform targetPos;
     public Transform[] spawnPoint;
     public float spawnTimeMin;
     public float spawnTimeMax;
@@ -32,7 +33,7 @@ public class EnemyGenerator : MonoBehaviour
 
         if(timeAfterSpawn >= spawnTime)
         {
-            int spawnPos = Random.Range(0, spawnPoint.Length);
+            int spawnPos = Random.Range(0, spawnPoint.Length);  
             GameObject enemy = Instantiate(enemyPrefab, spawnPoint[spawnPos].position, spawnPoint[spawnPos].rotation);
             enemy.GetComponent<EnemyController>().target = targetPos;
             timeAfterSpawn = 0f;

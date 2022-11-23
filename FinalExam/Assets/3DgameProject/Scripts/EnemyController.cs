@@ -8,12 +8,12 @@ public class EnemyController : MonoBehaviour
     [SerializeField]
     private int hp = 10; // 적 HP
 
-    [SerializeField]
-    private int enemyDamage = 1; // 적 데미지
+    //[SerializeField]
+    //private int enemyDamage = 1; // 적 데미지
 
     NavMeshAgent agent; // Nav agent
 
-    public GameObject target; // 쫓아갈 대상
+    public Transform target; // 쫓아갈 대상
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -21,34 +21,41 @@ public class EnemyController : MonoBehaviour
         {
             hp -= collision.gameObject.GetComponent<MagicCasting>().magicDamage; // 매직스크립트에 적힌 데미지만큼 감소
         }
-        if (collision.gameObject.tag == "Player") // 플레이어한테 도착했을 때
+/*        if (collision.gameObject.tag == "Player") // 플레이어한테 도착했을 때
         {
             
-        }
+        }*/
     }
 
+    private void Awake()
+    {
+        agent = GetComponent<NavMeshAgent>(); // 네비게이션메쉬
+/*        agent.enabled = false;*/
+    }
     // Start is called before the first frame update
     void Start()
     {
-        agent = GetComponent<NavMeshAgent>(); // 네비게이션메쉬
-        StartCoroutine(FindPlayer());
+/*        StartCoroutine(FindPlayer());*/
     }
 
     // Update is called once per frame
     void Update()
     {
+        agent.SetDestination(target.position);
+
         if (hp <= 0) // hp가 0 이하가 될 경우
         {
+            //agent.enabled = false;
             Destroy(gameObject); // 오브젝트 삭제
         }
     }
 
-    IEnumerator FindPlayer()
+/*    IEnumerator FindPlayer()
     {
         agent.enabled = true;
-        while (agent.SetDestination(target.transform.position))
+        while (agent.Warp(target.position))
         {
             yield return null;
         }
-    }
+    }*/
 }
