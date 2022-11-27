@@ -12,11 +12,13 @@ namespace VRUiKits.Utils
     public class LaserPointer : MonoBehaviour
     {
         LineRenderer lr;
+        public GameObject CursorDirector;
 
         #region MonoBehaviour Callbacks
         void Awake()
         {
             lr = GetComponent<LineRenderer>();
+            
         }
 
         void LateUpdate()
@@ -30,6 +32,10 @@ namespace VRUiKits.Utils
                 if (hit.collider)
                 {
                     lr.SetPosition(1, hit.point);
+                    if (hit.collider.tag == "UI")
+                    {
+                        CursorDirector.GetComponent<CursorDirector>().DisplayCursor(hit.point); // 콜라이더 맞은게 UI 캔버스면 DisplayCursor 메서드 실행
+                    }
                 }
             }
             else

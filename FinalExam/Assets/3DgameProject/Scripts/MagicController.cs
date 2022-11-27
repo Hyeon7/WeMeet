@@ -8,6 +8,8 @@ public class MagicController : MonoBehaviour
     public Transform curser;
     public GameObject magic;
     public LineRenderer lr;
+    public LayerMask magicly;
+    public LayerMask UI;
 
     Vector3 startPos, endPos;
     public GameObject hitInfo;
@@ -25,18 +27,21 @@ public class MagicController : MonoBehaviour
         if (OVRInput.GetDown(OVRInput.Button.Three)) // 왼손 x버튼 눌렀을 때
         {
             lr.enabled = true; // 라인렌더러 활성화
+            hitInfo.SetActive(true);
         }
 
         if (OVRInput.Get(OVRInput.Button.Three)) // 왼손 x버튼 누르고 있을 때
         {
             lr.SetPosition(0, curser.position); // 시작지점
             RaycastHit hit; // 레이캐스트 선언
-            if (Physics.Raycast(curser.position, curser.forward, out hit)) // 레이캐스트를 커서 위치에서 앞방향으로 날린다
+            if (Physics.Raycast(curser.position, curser.forward, out hit, Mathf.Infinity, ~(magicly | UI))) // 레이캐스트를 커서 위치에서 앞방향으로 날린다
             {
                 if (hit.collider) // 레이캐스트로 충돌됐을 시
                 {
                     lr.SetPosition(1, hit.point); // 몬스터 -> 레이저 안 뚫고 나가게하는거
                     hitInfo.transform.position = hit.point; // 충돌 위치를 구로 표현
+                    if (hit.collider.gameObject.tag == "Sky" && hitInfo.activeInHierarchy) hitInfo.SetActive(false);
+                    else if(hit.collider.gameObject.tag != "Sky" && !hitInfo.activeInHierarchy) hitInfo.SetActive(true);
                 }
             }
         }
@@ -44,6 +49,7 @@ public class MagicController : MonoBehaviour
         if (OVRInput.GetUp(OVRInput.Button.Three)) // 왼손 x버튼 뗐을 때
         {
             lr.enabled = false; // 라인렌더러 비활성화
+            hitInfo.SetActive(false);
         }
 
         if (OVRInput.GetDown(OVRInput.Button.Four)) // 왼손 y버튼 눌렀을 때
