@@ -13,7 +13,9 @@ public class EnemyController : MonoBehaviour
 
     NavMeshAgent agent; // Nav agent
 
-    public Transform target; // 쫓아갈 대상
+    public Transform target; // 쫓아갈 대상  
+
+    Animation anim;
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -42,6 +44,12 @@ public class EnemyController : MonoBehaviour
     void Update()
     {
         agent.SetDestination(target.position);
+
+        if (agent.SetDestination(target.position))
+        {
+            //anim.g
+        }
+        ssssss
 
         if (hp <= 0) // hp가 0 이하가 될 경우
         {
