@@ -5,7 +5,7 @@ using UnityEngine;
 public class MagicCasting : MonoBehaviour
 {
     [SerializeField]
-    private float magicSpeed = 1f; // 마법 속도
+    private float magicSpeed = 0.5f; // 마법 속도
 
     public int magicDamage = 3; // 마법 데미지
 

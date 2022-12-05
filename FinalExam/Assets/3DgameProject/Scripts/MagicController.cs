@@ -7,12 +7,18 @@ public class MagicController : MonoBehaviour
 {
     public Transform curser;
     public GameObject magic;
+    public GameObject[] magics = new GameObject[10];
     public LineRenderer lr;
     public LayerMask magicly;
-    public LayerMask UI;
-
-    Vector3 startPos, endPos;
+    bool is_NormalCooltime;
     public GameObject hitInfo;
+    public GameObject SelectNow;
+
+    public GameObject Btn;
+    public GameObject canvas;
+    public Sprite[] Skillimgs = new Sprite[10];
+    GameObject NewBtn;
+
 
     // Start is called before the first frame update
     void Start()
@@ -20,79 +26,78 @@ public class MagicController : MonoBehaviour
         lr.enabled = false;
     }
 
+    private void Awake()
+    {
+        int SkillNumber;
+        for (int i = 0; i < 4; i++)
+        {
+            SkillNumber = Random.Range(0, 9);
+            GameObject b = Instantiate(Btn);
+            b.name = "BTN" + i;
+            b.transform.parent = canvas.transform;
+            b.GetComponent<RectTransform>().anchoredPosition = new Vector3(37.5f + 75 * i, 50, 0);
+            b.GetComponent<BtnController>().SkillType = SkillNumber;
+            b.GetComponent<Image>().sprite = Skillimgs[SkillNumber];
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
-        //Debug.DrawRay(curser.position, curser.rotation.eulerAngles, Color.red, 0.1f);
-        if (OVRInput.GetDown(OVRInput.Button.Three)) // 왼손 x버튼 눌렀을 때
+        lr.SetPosition(0, curser.position); // 시작지점
+        RaycastHit hit; // 레이캐스트 선언
+        if (Physics.Raycast(curser.position, curser.forward, out hit, Mathf.Infinity, ~magicly) 
+            && VRUiKits.Utils.LaserPointer.is_Out && SelectNow != null) // 레이캐스트를 커서 위치에서 앞방향으로 날린다
         {
-            lr.enabled = true; // 라인렌더러 활성화
-            hitInfo.SetActive(true);
-        }
-
-        if (OVRInput.Get(OVRInput.Button.Three)) // 왼손 x버튼 누르고 있을 때
-        {
-            lr.SetPosition(0, curser.position); // 시작지점
-            RaycastHit hit; // 레이캐스트 선언
-            if (Physics.Raycast(curser.position, curser.forward, out hit, Mathf.Infinity, ~(magicly | UI))) // 레이캐스트를 커서 위치에서 앞방향으로 날린다
+            if (hit.collider) // 레이캐스트로 충돌됐을 시
             {
-                if (hit.collider) // 레이캐스트로 충돌됐을 시
-                {
-                    lr.SetPosition(1, hit.point); // 몬스터 -> 레이저 안 뚫고 나가게하는거
-                    hitInfo.transform.position = hit.point; // 충돌 위치를 구로 표현
-                    if (hit.collider.gameObject.tag == "Sky" && hitInfo.activeInHierarchy) hitInfo.SetActive(false);
-                    else if(hit.collider.gameObject.tag != "Sky" && !hitInfo.activeInHierarchy) hitInfo.SetActive(true);
-                }
+                lr.enabled = true;
+                lr.SetPosition(1, hit.point); // 몬스터 -> 레이저 안 뚫고 나가게하는거
+                hitInfo.transform.position = hit.point; // 충돌 위치를 구로 표현
+                if (hit.collider.gameObject.tag == "Sky" && hitInfo.activeInHierarchy) hitInfo.SetActive(false);        // 레이저가 하늘에 닿으면 힛 인포 안보이게
+                else if (hit.collider.gameObject.tag != "Sky" && !hitInfo.activeInHierarchy) hitInfo.SetActive(true);
             }
         }
-
-        if (OVRInput.GetUp(OVRInput.Button.Three)) // 왼손 x버튼 뗐을 때
+        else
         {
-            lr.enabled = false; // 라인렌더러 비활성화
             hitInfo.SetActive(false);
+            lr.enabled = false;
         }
 
-        if (OVRInput.GetDown(OVRInput.Button.Four)) // 왼손 y버튼 눌렀을 때
+        if (OVRInput.Get(OVRInput.Button.One) && !is_NormalCooltime) // 오른손 A버튼
         {
-            lr.enabled = true; // 라인렌더러 활성화
-        }
-
-        if (OVRInput.Get(OVRInput.Button.Four)) // 왼손 y버튼 누르고 있을 때
-        {
-            RaycastHit hit; // 레이캐스트 선언
-            if (Physics.Raycast(curser.position, curser.forward, out hit)) // 레이캐스트를 커서 위치에서 앞방향으로 날린다
-            {
-                if (hit.collider) // 레이캐스트로 충돌됐을 시
-                {
-                    startPos = curser.position; // 라인렌더러 시작지점 -> 커서위치
-                    endPos = hit.point; // 라인렌더러 마지막 위치 -> 충돌 지점
-                    hitInfo.transform.position = hit.point; // 충돌 위치를 구로 표현
-                }
-            }
-
-            Vector3 center = (startPos + endPos) * 0.5f; // 포물선의 중간 지점
-
-            center.y -= 3.0f; // 중간지점의 높이를 줄임
-
-            startPos = startPos - center; // 시작지점 높이를 줄임
-            endPos = endPos - center; // 끝지점 높이를 줄임
-
-            for (int i = 0; i < lr.positionCount; i++) // 라인렌더러가 갖는 포지션 개수만큼 반복
-            {
-                Vector3 point = Vector3.Slerp(startPos, endPos, i / (float)(lr.positionCount - 1)); // 시작지점부터 끝지점까지 구형보간을 사용해서 포지션 번호만큼 나눔
-                point += center; // 포물선을 위로 그리기 위해 빼준 센터값을 다시 더해줌
-                lr.SetPosition(i, point); // 각 위치의 라인렌더러값 설정
-            }
-        }
-
-        if (OVRInput.GetUp(OVRInput.Button.Four)) // 왼손 Y버튼을 뗐을 때
-        {
-            lr.enabled = false; // 라인렌더러 비활섷와
-        }
-
-        if (OVRInput.GetDown(OVRInput.Button.One)) // 오른손 A버튼
-        {
+            is_NormalCooltime = true;
             Instantiate(magic, curser.transform.position, curser.transform.rotation); // 인스턴스생성
+            Invoke("CoolTimeDone", 0.5f);
         }
+
+        if (OVRInput.GetUp(OVRInput.Button.PrimaryIndexTrigger) && SelectNow != null && VRUiKits.Utils.LaserPointer.is_Out)
+        {
+            GameObject p = Instantiate(magics[SelectNow.GetComponent<BtnController>().SkillType], hit.point, curser.transform.rotation);
+            NewBtn = Instantiate(Btn);
+            NewBtn.transform.parent = canvas.transform;
+            NewBtn.transform.position = SelectNow.transform.position;
+            NewBtn.name = SelectNow.name;
+            int SkillNumber = Random.Range(0, 9);
+            NewBtn.GetComponent<BtnController>().SkillType = SkillNumber;
+            NewBtn.GetComponent<Image>().sprite = Skillimgs[SkillNumber];
+            NewBtn.SetActive(false);
+            StartCoroutine(CreateNewBtn(NewBtn));
+            Destroy(SelectNow);
+            Destroy(p, 3f);
+        }
+    }
+
+    IEnumerator CreateNewBtn (GameObject newBtn)
+    {
+        yield return new WaitForSeconds(20f);
+        newBtn.SetActive(true);
+        
+    }
+    
+
+    void CoolTimeDone()
+    {
+        is_NormalCooltime = false;
     }
 }

@@ -444,3 +444,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CursorDirector: {fileID: 0}
+  Hand:
+    serializedVersion: 2
+    m_Bits: 0
+  Cursor: {fileID: 0}
