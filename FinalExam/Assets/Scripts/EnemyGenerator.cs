@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class EnemyGenerator : MonoBehaviour
 {
-    public GameObject[] enemyPrefab;
     [SerializeField]
-    int count = 30;
+    int count = 30; // 적 몬스터의 수
+
+    public GameObject[] enemyPrefab; // 적 프리펩 
     public Transform[] spawnPoint;
     public float spawnTimeMin;
     public float spawnTimeMax;
