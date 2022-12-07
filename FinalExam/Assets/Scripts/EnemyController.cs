@@ -5,8 +5,7 @@ using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour
 {
-    [SerializeField]
-    private int hp = 10; // 적 HP
+    public int hp; // 적 HP
 
     NavMeshAgent agent; // Nav agent
     Rigidbody rigid; // 리지드바디
@@ -26,6 +25,7 @@ public class EnemyController : MonoBehaviour
         {
             anim.SetBool("Run Forward", false); // 달리는 애니메이션 비활성화
             anim.SetTrigger("Punch"); // 펀치 애니메이션 트리거 활성화
+            
         }
     }
 
