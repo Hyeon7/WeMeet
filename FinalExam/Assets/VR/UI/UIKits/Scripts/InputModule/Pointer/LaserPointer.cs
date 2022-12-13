@@ -13,10 +13,10 @@ namespace VRUiKits.Utils
     public class LaserPointer : MonoBehaviour
     {
         LineRenderer lr;
-        public GameObject CursorDirector;
         public static bool On_Clicked = false;
         public LayerMask Hand;
         public GameObject Cursor;
+        public LayerMask Magic;
         public static bool is_Out;
 
         #region MonoBehaviour Callbacks
@@ -36,12 +36,12 @@ namespace VRUiKits.Utils
             {
                 On_Clicked = false;
             }
-            
+
             lr.SetPosition(0, transform.position);
             RaycastHit hit;
             Vector3 fwd = transform.TransformDirection(Vector3.forward);
 
-            if (Physics.Raycast(transform.position, fwd, out hit, Mathf.Infinity, ~Hand))
+            if (Physics.Raycast(transform.position, fwd, out hit, Mathf.Infinity, ~(Hand | Magic)))
             {
                 if (hit.collider)
                 {
@@ -53,7 +53,7 @@ namespace VRUiKits.Utils
                         BtnController.HitPos = hit.point;
                         Cursor.transform.position = hitView;
                         is_Out = false;
-                        
+
                     }
                     else
                     {

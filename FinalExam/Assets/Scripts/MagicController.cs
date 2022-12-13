@@ -79,7 +79,7 @@ public class MagicController : MonoBehaviour
         {
             is_NormalCooltime = true; // 쿨타임을 활성화
             Instantiate(magic, curser.transform.position, curser.transform.rotation); // 인스턴스생성
-            Invoke("CoolTimeDone", 0.5f); // 쿨타임함수 0.5초뒤 실행
+            Invoke("CoolTimeDone", 0.1f); // 쿨타임함수 0.5초뒤 실행
         }
 
         if (OVRInput.GetUp(OVRInput.Button.PrimaryIndexTrigger) && SelectNow != null && VRUiKits.Utils.LaserPointer.is_Out) // 오른손 A버튼을 뗐으며 현재 선택된 버튼이 있고 UI칸을 벗어났을 경우(스킬을 선택하여 발사한 경우) 
@@ -89,7 +89,7 @@ public class MagicController : MonoBehaviour
             NewBtn.transform.parent = canvas.transform; // 새 버튼 하이어라키 부모 설정
             NewBtn.transform.position = SelectNow.transform.position; // 새 버튼 위치 초기화
             NewBtn.name = SelectNow.name; // 새 버튼 이름 설정
-            int SkillNumber = Random.Range(0, 9); // 숫자 랜덤 배정
+            int SkillNumber = Random.Range(0, 8); // 숫자 랜덤 배정
             NewBtn.GetComponent<BtnController>().SkillType = SkillNumber; // 스킬 종류를 정해진 번호의 스킬로 설정
             NewBtn.GetComponent<Image>().sprite = Skillimgs[SkillNumber]; // 스킬 종류를 정해진 번호의 이미지로 설정
             NewBtn.SetActive(false); // 새 버튼 비활성화

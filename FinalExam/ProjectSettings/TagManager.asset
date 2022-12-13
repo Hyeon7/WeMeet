@@ -9,11 +9,13 @@ TagManager:
   - Sky
   - VRGazeInteractable
   - UI
+  - RoomLight
+  - btn
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Enemy
   - Water
   - UI
   - Player

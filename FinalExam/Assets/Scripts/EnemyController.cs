@@ -10,10 +10,10 @@ public class EnemyController : MonoBehaviour
     NavMeshAgent agent; // Nav agent
     Rigidbody rigid; // 리지드바디
     Animator anim; // 애니메이터
-
+    public float Damage;
     public Transform target; // 쫓아갈 대상  
     public bool isChase; // 뒤쫓는 상태
-
+    PlayerController player;
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -25,12 +25,12 @@ public class EnemyController : MonoBehaviour
         {
             anim.SetBool("Run Forward", false); // 달리는 애니메이션 비활성화
             anim.SetTrigger("Punch"); // 펀치 애니메이션 트리거 활성화
-            
         }
     }
 
     void Awake()
     {
+        isChase = true;
         agent = GetComponent<NavMeshAgent>(); // 네비게이션메쉬
         anim = GetComponent<Animator>(); // 애니메이터
         rigid = GetComponent<Rigidbody>(); // 리지드바디

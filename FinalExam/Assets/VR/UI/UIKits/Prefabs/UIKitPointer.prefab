@@ -443,8 +443,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90c4dd4ded1eb1f40a3734c96d5f44d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CursorDirector: {fileID: 0}
   Hand:
     serializedVersion: 2
     m_Bits: 0
   Cursor: {fileID: 0}
+  Magic:
+    serializedVersion: 2
+    m_Bits: 0
