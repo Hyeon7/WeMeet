@@ -13,10 +13,10 @@ public class EnemyController : MonoBehaviour
     public float Damage;
     public Transform target; // 쫓아갈 대상  
     public bool isChase; // 뒤쫓는 상태
-    PlayerController player;
-    private float ColumnDamageTime = 3;
-    private float BeamDamageTime = 6;
-    private float BallDamageTime = 3;
+    GameObject Player;
+    GameObject Director;
+    bool isDamage = false;
+    public GameObject director;
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -28,6 +28,7 @@ public class EnemyController : MonoBehaviour
         {
             anim.SetBool("Run Forward", false); // 달리는 애니메이션 비활성화
             anim.SetTrigger("Punch"); // 펀치 애니메이션 트리거 활성화
+            Player.GetComponent<PlayerController>().PlayerHp -= Damage;
         }
     }
 
@@ -35,34 +36,39 @@ public class EnemyController : MonoBehaviour
     {
         if (other.gameObject.tag == "Column")
         {
-            if (ColumnDamageTime >= 0)
+            if (!isDamage)
             {
-                hp -= other.gameObject.GetComponent<MagicController>().ColumnDamage;
-                Debug.Log("Column");
-                ColumnDamageTime = 3;
-            }
-        }
-
-        if (other.gameObject.tag == "Beam")
-        {
-            if (BeamDamageTime >= 0)
-            {
-                hp -= other.gameObject.GetComponent<MagicController>().BeamDamage;
-                Debug.Log("Beam");
-                BeamDamageTime = 6;
+                hp -= 5;
+                StartCoroutine(DamageMagic1(hp));
+                isDamage = true;
             }
         }
 
         if (other.gameObject.tag == "Ball")
         {
-            BallDamageTime -= Time.deltaTime;
-            if (BallDamageTime >= 0)
+            if (!isDamage)
             {
-                hp -= other.gameObject.GetComponent<MagicController>().BallDamage;
-                Debug.Log("Ball");
-                BallDamageTime = 3;
+                hp -= 10;
+                StartCoroutine(DamageMagic3(hp));
+                isDamage = true;
             }
         }
+    }
+
+    IEnumerator DamageMagic1(int hp)
+    {
+
+        yield return new WaitForSeconds(1f);
+        hp -= 5;
+        isDamage = false;
+    }
+
+    IEnumerator DamageMagic3(int hp)
+    {
+
+        yield return new WaitForSeconds(1f);
+        hp -= 100;
+        isDamage = false;
     }
 
     void Awake()
@@ -72,6 +78,8 @@ public class EnemyController : MonoBehaviour
         anim = GetComponent<Animator>(); // 애니메이터
         rigid = GetComponent<Rigidbody>(); // 리지드바디
         Invoke("ChaseStart", 2); // 2초 뒤에 함수 실행
+        Player = GameObject.Find("OVRPlayerController");
+        Director = GameObject.Find("GameDirector");
     }
 
     void ChaseStart()
@@ -108,6 +116,9 @@ public class EnemyController : MonoBehaviour
             agent.enabled = false; // agent 비활성화
             anim.SetTrigger("Die"); // 다이 애니메이션 트리거 작동
             Destroy(gameObject, 3); // 오브젝트 삭제
+            Director.GetComponent<GameDirector>().count -= 1;
+            Debug.Log(Director.GetComponent<GameDirector>().count);
+            hp = 50000;
         }
     }
 }

@@ -6306,7 +6306,7 @@ GameObject:
   - component: {fileID: 1541960538935810510}
   - component: {fileID: 1541960538935810547}
   - component: {fileID: 1541960538935810546}
-  - component: {fileID: 1680936939265417905}
+  - component: {fileID: 6151531937701436753}
   m_Layer: 3
   m_Name: Treasure Goblin - Red
   m_TagString: Enemy
@@ -6397,7 +6397,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 4
+  m_Speed: 2.5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -6425,7 +6425,8 @@ MonoBehaviour:
   Damage: 0.5
   target: {fileID: 2477701611529491793, guid: be5f3b867e9cf6c41ba04f9839f685b7, type: 3}
   isChase: 0
---- !u!65 &1680936939265417905
+  director: {fileID: 0}
+--- !u!65 &6151531937701436753
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6436,8 +6437,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.3004156, z: 1.5}
-  m_Center: {x: 0, y: 0.6473679, z: 0.25}
+  m_Size: {x: 1, y: 1.3022499, z: 1.5}
+  m_Center: {x: 0, y: 0.65049446, z: 0.25}
 --- !u!1 &1541960539640655299
 GameObject:
   m_ObjectHideFlags: 0

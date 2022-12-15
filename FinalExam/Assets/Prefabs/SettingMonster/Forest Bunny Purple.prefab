@@ -264,7 +264,7 @@ GameObject:
   - component: {fileID: 158016438317172310}
   - component: {fileID: 158016438317172305}
   - component: {fileID: 158016438317172306}
-  - component: {fileID: 5080653924990607123}
+  - component: {fileID: 3904371883839114079}
   m_Layer: 3
   m_Name: Forest Bunny Purple
   m_TagString: Enemy
@@ -281,7 +281,7 @@ Transform:
   m_GameObject: {fileID: 158947908183400150}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.192, y: 0, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 153569345434528196}
@@ -341,7 +341,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 4.2
+  m_Speed: 2.5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -369,7 +369,8 @@ MonoBehaviour:
   Damage: 0.1
   target: {fileID: 2477701611529491793, guid: be5f3b867e9cf6c41ba04f9839f685b7, type: 3}
   isChase: 0
---- !u!65 &5080653924990607123
+  director: {fileID: 0}
+--- !u!65 &3904371883839114079
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -380,8 +381,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.3333335, y: 0.7974175, z: 1.6666667}
-  m_Center: {x: -0.00000011920929, y: 0.39785203, z: 0.33333334}
+  m_Size: {x: 1, y: 0.8092505, z: 1.5}
+  m_Center: {x: 0, y: 0.3940863, z: 0.25}
 --- !u!1 &159033592544163362
 GameObject:
   m_ObjectHideFlags: 0

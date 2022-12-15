@@ -6,7 +6,7 @@ public class MagicCasting : MonoBehaviour
 {
     [SerializeField]
     private float magicSpeed = 6f; // 마법 속도
-    public int magicDamage; // 마법 데미지
+    public int magicDamage = 1; // 마법 데미지
 
     private void OnCollisionEnter(Collision collision)
     {

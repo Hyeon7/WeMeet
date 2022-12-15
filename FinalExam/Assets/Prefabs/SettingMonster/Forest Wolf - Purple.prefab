@@ -2290,7 +2290,7 @@ GameObject:
   - component: {fileID: 2152466146146000035}
   - component: {fileID: 2152466146146000038}
   - component: {fileID: 2152466146146000039}
-  - component: {fileID: 1346059036801182347}
+  - component: {fileID: 3258790880640522376}
   m_Layer: 3
   m_Name: Forest Wolf - Purple
   m_TagString: Enemy
@@ -2388,10 +2388,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0593f26065c61dd4c842049a4f3caa13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 20
-  Damage: 1.5
+  hp: 15
+  Damage: 1
   target: {fileID: 2477701611529491793, guid: be5f3b867e9cf6c41ba04f9839f685b7, type: 3}
   isChase: 0
+  director: {fileID: 0}
 --- !u!195 &2152466146146000039
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -2402,7 +2403,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 5
+  m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -2414,7 +2415,7 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!65 &1346059036801182347
+--- !u!65 &3258790880640522376
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2425,8 +2426,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.8000001, y: 0.9996414, z: 1.8000001}
-  m_Center: {x: 0, y: 0.50066835, z: 0.4}
+  m_Size: {x: 1, y: 0.93264467, z: 1.4}
+  m_Center: {x: 0, y: 0.4506672, z: 0.2}
 --- !u!1 &2152466146808891887
 GameObject:
   m_ObjectHideFlags: 0

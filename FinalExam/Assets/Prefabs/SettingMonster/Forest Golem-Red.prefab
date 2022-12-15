@@ -1649,9 +1649,9 @@ GameObject:
   - component: {fileID: 1960807763388153684}
   - component: {fileID: 1960807763378622616}
   - component: {fileID: 1960807762878669375}
-  - component: {fileID: 1960807762878669374}
   - component: {fileID: 1960807762878669362}
   - component: {fileID: 1960807762878669363}
+  - component: {fileID: 1363328002119523489}
   m_Layer: 3
   m_Name: Forest Golem-Red
   m_TagString: Enemy
@@ -1740,19 +1740,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &1960807762878669374
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1960807763388113716}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2.2, y: 2.199337, z: 1.4}
-  m_Center: {x: 0, y: 1.1038903, z: 0.2}
 --- !u!195 &1960807762878669362
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1763,7 +1750,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 2
+  m_Speed: 1
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -1787,10 +1774,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0593f26065c61dd4c842049a4f3caa13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 100
-  Damage: 5
+  hp: 50
+  Damage: 1
   target: {fileID: 2477701611529491793, guid: be5f3b867e9cf6c41ba04f9839f685b7, type: 3}
   isChase: 0
+  director: {fileID: 0}
+--- !u!65 &1363328002119523489
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1960807763388113716}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 2.1971169, z: 1.2}
+  m_Center: {x: 0, y: 1.1009625, z: 0.1}
 --- !u!1 &1960807763388113718
 GameObject:
   m_ObjectHideFlags: 0

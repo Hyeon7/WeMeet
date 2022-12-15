@@ -5,25 +5,41 @@ using UnityEngine.SceneManagement;
 
 public class GameDirector : MonoBehaviour
 {
-    public static GameDirector instance;
 
-    public void Awake() //대충 넘깁시다
+    
+    public int count = 15;
+
+    private void Start()
     {
-        if (instance == null)
+        
+    }
+
+    private void Update()
+    {
+        if(count == 0)
         {
-            instance = this;
-        }
-        else
-        {
-            if (instance != this)
-            {
-                Destroy(this.gameObject);
-            }
+            StartPage();
         }
     }
 
-    public void NextSTAGE() // 게임 플레이 화면으로 이동한다.
+    public void StartPage()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene("Start");
     }
+
+    public void Stage1()
+    {
+        SceneManager.LoadScene("Stage1");
+    }
+
+    public void Stage2()
+    {
+        SceneManager.LoadScene("Stage2");
+    }
+
+    public void Stage3()
+    {
+        SceneManager.LoadScene("Stage3");
+    }
+
 }

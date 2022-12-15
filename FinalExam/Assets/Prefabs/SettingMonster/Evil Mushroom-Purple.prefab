@@ -580,7 +580,7 @@ GameObject:
   - component: {fileID: 8703498781035370943}
   - component: {fileID: 8703498781035370936}
   - component: {fileID: 8703498781035370939}
-  - component: {fileID: -970612191837008409}
+  - component: {fileID: 6948638758618790816}
   m_Layer: 3
   m_Name: Evil Mushroom-Purple
   m_TagString: Enemy
@@ -664,7 +664,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 2.5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -689,10 +689,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 20
-  Damage: 2
+  Damage: 1
   target: {fileID: 2477701611529491793, guid: be5f3b867e9cf6c41ba04f9839f685b7, type: 3}
   isChase: 0
---- !u!65 &-970612191837008409
+  director: {fileID: 0}
+--- !u!65 &6948638758618790816
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -703,8 +704,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.5, y: 1.3022486, z: 1.5}
-  m_Center: {x: -0.000000029802322, y: 0.65377384, z: 0}
+  m_Size: {x: 1, y: 1.2221986, z: 1.25}
+  m_Center: {x: 0, y: 0.64437526, z: 0.125}
 --- !u!1 &8703498782106056375
 GameObject:
   m_ObjectHideFlags: 0

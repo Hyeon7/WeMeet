@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float PlayerHp;
+    
+    public float PlayerHp = 30;
+    public GameObject director;
 
-    void GameOver()
+    private void Start()
     {
-        if(PlayerHp <= 0)
+        if (PlayerHp <= 0)
         {
-            Debug.Log("Game Over");
+            director.GetComponent<GameDirector>().StartPage();
         }
     }
 }

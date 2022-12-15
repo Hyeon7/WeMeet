@@ -7,17 +7,13 @@ public class MagicController : MonoBehaviour
 {
     public Transform curser; // 커서
     public GameObject magic; // 마법
-    public GameObject[] magics = new GameObject[10]; // 마법 종류
+    public GameObject[] magics = new GameObject[7]; // 마법 종류
     public LineRenderer lr; // 라인렌더러
     public LayerMask magicly; // 마법 레이어마스크
     public GameObject hitInfo; // 충돌된 위치 표현
     public GameObject SelectNow; // 커서로 선택된 스킬 버튼
     public GameObject player;
     bool is_NormalCooltime; // 기본 스킬 쿨타임
-
-    public int ColumnDamage;
-    public int BeamDamage;
-    public int BallDamage;
 
     public GameObject Btn; // 버튼
     public GameObject canvas; // 캔버스
@@ -40,7 +36,7 @@ public class MagicController : MonoBehaviour
         int SkillNumber; // 스킬 번호
         for (int i = 0; i < 4; i++) 
         {
-            SkillNumber = Random.Range(0, 9); // 랜덤 숫자 설정
+            SkillNumber = Random.Range(0, 6); // 랜덤 숫자 설정
             GameObject b = Instantiate(Btn); //버튼 생성
             b.name = "BTN" + i; // 버튼 이름 지정
             b.transform.parent = canvas.transform; // 하이어라키 위치 지정
@@ -95,7 +91,7 @@ public class MagicController : MonoBehaviour
                 NewBtn.transform.parent = canvas.transform; // 새 버튼 하이어라키 부모 설정
                 NewBtn.transform.position = SelectNow.transform.position; // 새 버튼 위치 초기화
                 NewBtn.name = SelectNow.name; // 새 버튼 이름 설정
-                int SkillNumber = Random.Range(0, 8); // 숫자 랜덤 배정
+                int SkillNumber = Random.Range(0, 6); // 숫자 랜덤 배정
                 NewBtn.GetComponent<BtnController>().SkillType = SkillNumber; // 스킬 종류를 정해진 번호의 스킬로 설정
                 NewBtn.GetComponent<Image>().sprite = Skillimgs[SkillNumber]; // 스킬 종류를 정해진 번호의 이미지로 설정
                 NewBtn.SetActive(false); // 새 버튼 비활성화
@@ -103,30 +99,15 @@ public class MagicController : MonoBehaviour
                 Destroy(SelectNow);
                 Destroy(Skill, 3f);
             }
-            if (SelectNow.GetComponent<BtnController>().SkillType == 6 || SelectNow.GetComponent<BtnController>().SkillType == 7)
-            {
-                GameObject Skill = Instantiate(magics[SelectNow.GetComponent<BtnController>().SkillType], curser.transform.position, player.transform.rotation); // 선택된 스킬 생성
-                NewBtn = Instantiate(Btn); // 새 버튼 생성
-                NewBtn.transform.parent = canvas.transform; // 새 버튼 하이어라키 부모 설정
-                NewBtn.transform.position = SelectNow.transform.position; // 새 버튼 위치 초기화
-                NewBtn.name = SelectNow.name; // 새 버튼 이름 설정
-                int SkillNumber = Random.Range(0, 8); // 숫자 랜덤 배정
-                NewBtn.GetComponent<BtnController>().SkillType = SkillNumber; // 스킬 종류를 정해진 번호의 스킬로 설정
-                NewBtn.GetComponent<Image>().sprite = Skillimgs[SkillNumber]; // 스킬 종류를 정해진 번호의 이미지로 설정
-                NewBtn.SetActive(false); // 새 버튼 비활성화
-                StartCoroutine(CreateNewBtn(NewBtn)); // 코루틴 시작
-                Destroy(SelectNow);
-                Destroy(Skill, 6f);
-            }
            
-            if (SelectNow.GetComponent<BtnController>().SkillType == 8 )
+            if (SelectNow.GetComponent<BtnController>().SkillType == 6 )
             {
                 GameObject Skill = Instantiate(magics[SelectNow.GetComponent<BtnController>().SkillType], curser.transform.position, player.transform.rotation); // 선택된 스킬 생성
                 NewBtn = Instantiate(Btn); // 새 버튼 생성
                 NewBtn.transform.parent = canvas.transform; // 새 버튼 하이어라키 부모 설정
                 NewBtn.transform.position = SelectNow.transform.position; // 새 버튼 위치 초기화
                 NewBtn.name = SelectNow.name; // 새 버튼 이름 설정
-                int SkillNumber = Random.Range(0, 8); // 숫자 랜덤 배정
+                int SkillNumber = Random.Range(0, 6); // 숫자 랜덤 배정
                 NewBtn.GetComponent<BtnController>().SkillType = SkillNumber; // 스킬 종류를 정해진 번호의 스킬로 설정
                 NewBtn.GetComponent<Image>().sprite = Skillimgs[SkillNumber]; // 스킬 종류를 정해진 번호의 이미지로 설정
                 NewBtn.SetActive(false); // 새 버튼 비활성화
@@ -139,7 +120,7 @@ public class MagicController : MonoBehaviour
 
     IEnumerator CreateNewBtn (GameObject newBtn) // 스킬 쿨타임 (UI스킬 버튼 재생성)
     {
-        yield return new WaitForSeconds(20f); // 20초 후에 생성
+        yield return new WaitForSeconds(5f); // 20초 후에 생성
         newBtn.SetActive(true); // 새 버튼 활성화
         
     }
