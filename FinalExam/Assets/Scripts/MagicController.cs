@@ -12,13 +12,17 @@ public class MagicController : MonoBehaviour
     public LayerMask magicly; // 마법 레이어마스크
     public GameObject hitInfo; // 충돌된 위치 표현
     public GameObject SelectNow; // 커서로 선택된 스킬 버튼
+    public GameObject player;
     bool is_NormalCooltime; // 기본 스킬 쿨타임
+
+    public int ColumnDamage;
+    public int BeamDamage;
+    public int BallDamage;
 
     public GameObject Btn; // 버튼
     public GameObject canvas; // 캔버스
     public Sprite[] Skillimgs = new Sprite[10]; // 버튼 스킬 이미지
     GameObject NewBtn; // 재생성 버튼
-
 
     // Start is called before the first frame update
     void Start()
@@ -84,18 +88,52 @@ public class MagicController : MonoBehaviour
 
         if (OVRInput.GetUp(OVRInput.Button.PrimaryIndexTrigger) && SelectNow != null && VRUiKits.Utils.LaserPointer.is_Out) // 오른손 A버튼을 뗐으며 현재 선택된 버튼이 있고 UI칸을 벗어났을 경우(스킬을 선택하여 발사한 경우) 
         {
-            GameObject Skill = Instantiate(magics[SelectNow.GetComponent<BtnController>().SkillType], hit.point, curser.transform.rotation); // 선택된 스킬 생성
-            NewBtn = Instantiate(Btn); // 새 버튼 생성
-            NewBtn.transform.parent = canvas.transform; // 새 버튼 하이어라키 부모 설정
-            NewBtn.transform.position = SelectNow.transform.position; // 새 버튼 위치 초기화
-            NewBtn.name = SelectNow.name; // 새 버튼 이름 설정
-            int SkillNumber = Random.Range(0, 8); // 숫자 랜덤 배정
-            NewBtn.GetComponent<BtnController>().SkillType = SkillNumber; // 스킬 종류를 정해진 번호의 스킬로 설정
-            NewBtn.GetComponent<Image>().sprite = Skillimgs[SkillNumber]; // 스킬 종류를 정해진 번호의 이미지로 설정
-            NewBtn.SetActive(false); // 새 버튼 비활성화
-            StartCoroutine(CreateNewBtn(NewBtn)); // 코루틴 시작
-            Destroy(SelectNow);
-            Destroy(Skill, 3f);
+            if (SelectNow.GetComponent<BtnController>().SkillType == 0 || SelectNow.GetComponent<BtnController>().SkillType == 1 || SelectNow.GetComponent<BtnController>().SkillType == 2 || SelectNow.GetComponent<BtnController>().SkillType == 3 || SelectNow.GetComponent<BtnController>().SkillType == 4 || SelectNow.GetComponent<BtnController>().SkillType == 5)
+            {
+                GameObject Skill = Instantiate(magics[SelectNow.GetComponent<BtnController>().SkillType], hit.point, player.transform.rotation); // 선택된 스킬 생성
+                NewBtn = Instantiate(Btn); // 새 버튼 생성
+                NewBtn.transform.parent = canvas.transform; // 새 버튼 하이어라키 부모 설정
+                NewBtn.transform.position = SelectNow.transform.position; // 새 버튼 위치 초기화
+                NewBtn.name = SelectNow.name; // 새 버튼 이름 설정
+                int SkillNumber = Random.Range(0, 8); // 숫자 랜덤 배정
+                NewBtn.GetComponent<BtnController>().SkillType = SkillNumber; // 스킬 종류를 정해진 번호의 스킬로 설정
+                NewBtn.GetComponent<Image>().sprite = Skillimgs[SkillNumber]; // 스킬 종류를 정해진 번호의 이미지로 설정
+                NewBtn.SetActive(false); // 새 버튼 비활성화
+                StartCoroutine(CreateNewBtn(NewBtn)); // 코루틴 시작
+                Destroy(SelectNow);
+                Destroy(Skill, 3f);
+            }
+            if (SelectNow.GetComponent<BtnController>().SkillType == 6 || SelectNow.GetComponent<BtnController>().SkillType == 7)
+            {
+                GameObject Skill = Instantiate(magics[SelectNow.GetComponent<BtnController>().SkillType], curser.transform.position, player.transform.rotation); // 선택된 스킬 생성
+                NewBtn = Instantiate(Btn); // 새 버튼 생성
+                NewBtn.transform.parent = canvas.transform; // 새 버튼 하이어라키 부모 설정
+                NewBtn.transform.position = SelectNow.transform.position; // 새 버튼 위치 초기화
+                NewBtn.name = SelectNow.name; // 새 버튼 이름 설정
+                int SkillNumber = Random.Range(0, 8); // 숫자 랜덤 배정
+                NewBtn.GetComponent<BtnController>().SkillType = SkillNumber; // 스킬 종류를 정해진 번호의 스킬로 설정
+                NewBtn.GetComponent<Image>().sprite = Skillimgs[SkillNumber]; // 스킬 종류를 정해진 번호의 이미지로 설정
+                NewBtn.SetActive(false); // 새 버튼 비활성화
+                StartCoroutine(CreateNewBtn(NewBtn)); // 코루틴 시작
+                Destroy(SelectNow);
+                Destroy(Skill, 6f);
+            }
+           
+            if (SelectNow.GetComponent<BtnController>().SkillType == 8 )
+            {
+                GameObject Skill = Instantiate(magics[SelectNow.GetComponent<BtnController>().SkillType], curser.transform.position, player.transform.rotation); // 선택된 스킬 생성
+                NewBtn = Instantiate(Btn); // 새 버튼 생성
+                NewBtn.transform.parent = canvas.transform; // 새 버튼 하이어라키 부모 설정
+                NewBtn.transform.position = SelectNow.transform.position; // 새 버튼 위치 초기화
+                NewBtn.name = SelectNow.name; // 새 버튼 이름 설정
+                int SkillNumber = Random.Range(0, 8); // 숫자 랜덤 배정
+                NewBtn.GetComponent<BtnController>().SkillType = SkillNumber; // 스킬 종류를 정해진 번호의 스킬로 설정
+                NewBtn.GetComponent<Image>().sprite = Skillimgs[SkillNumber]; // 스킬 종류를 정해진 번호의 이미지로 설정
+                NewBtn.SetActive(false); // 새 버튼 비활성화
+                StartCoroutine(CreateNewBtn(NewBtn)); // 코루틴 시작
+                Destroy(SelectNow);
+                Destroy(Skill, 3f);
+            }
         }
     }
 

@@ -14,6 +14,9 @@ public class EnemyController : MonoBehaviour
     public Transform target; // 쫓아갈 대상  
     public bool isChase; // 뒤쫓는 상태
     PlayerController player;
+    private float ColumnDamageTime = 3;
+    private float BeamDamageTime = 6;
+    private float BallDamageTime = 3;
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -25,6 +28,40 @@ public class EnemyController : MonoBehaviour
         {
             anim.SetBool("Run Forward", false); // 달리는 애니메이션 비활성화
             anim.SetTrigger("Punch"); // 펀치 애니메이션 트리거 활성화
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.tag == "Column")
+        {
+            if (ColumnDamageTime >= 0)
+            {
+                hp -= other.gameObject.GetComponent<MagicController>().ColumnDamage;
+                Debug.Log("Column");
+                ColumnDamageTime = 3;
+            }
+        }
+
+        if (other.gameObject.tag == "Beam")
+        {
+            if (BeamDamageTime >= 0)
+            {
+                hp -= other.gameObject.GetComponent<MagicController>().BeamDamage;
+                Debug.Log("Beam");
+                BeamDamageTime = 6;
+            }
+        }
+
+        if (other.gameObject.tag == "Ball")
+        {
+            BallDamageTime -= Time.deltaTime;
+            if (BallDamageTime >= 0)
+            {
+                hp -= other.gameObject.GetComponent<MagicController>().BallDamage;
+                Debug.Log("Ball");
+                BallDamageTime = 3;
+            }
         }
     }
 

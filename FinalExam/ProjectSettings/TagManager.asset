@@ -11,6 +11,9 @@ TagManager:
   - UI
   - RoomLight
   - btn
+  - Column
+  - Beam
+  - Ball
   layers:
   - Default
   - TransparentFX
