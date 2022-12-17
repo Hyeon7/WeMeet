@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class UIController : MonoBehaviour
 {
-    public Text countText;
-    // Start is called before the first frame update
+    //public Text countText;
+    public GameObject GD;
 
     private void Start()
     {
@@ -16,5 +17,9 @@ public class UIController : MonoBehaviour
     void Update()
     {
        // countText.text = "몬스터 수 : " + GetComponent<GameDirector>().count;
-            }
+       if (Input.GetKeyDown(KeyCode.R))
+        {
+            GD.GetComponent<GameDirector>().StartPage();  
+        }
+    }
 }
